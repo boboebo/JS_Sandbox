@@ -124,8 +124,7 @@ const borrarTicket = (id) => {
   mostrarCompra();
 };
 
-const calcularTotal = () => {
-  let tickets = JSON.parse(localStorage.getItem("ticketsInStorage"));
+const calcularTotal = (tickets) => {
   total = 0;
   tickets.forEach((item) => {
     total += Number(item.precio);
@@ -133,15 +132,23 @@ const calcularTotal = () => {
 };
 
 const terminaCompra = () => {
-  calcularTotal();
-  // Alert con SweetAlert
-  Swal.fire({
-    icon: "success",
-    title: "La compra se realizo con exito",
-    text: `El total de la compra es £ ${Number.parseFloat(total).toFixed(
-      2
-    )}. Gracias por su Compra!`,
-  });
+  let tickets = JSON.parse(localStorage.getItem("ticketsInStorage"));
+  if (!tickets) {
+    // Alert con SweetAlert
+    Swal.fire({
+      icon: "info",
+      title: "No se agregaron Tickets a la compra",
+    });
+  } else {
+    calcularTotal(tickets);
+    Swal.fire({
+      icon: "success",
+      title: "La compra se realizo con exito",
+      text: `El total de la compra es £ ${Number.parseFloat(total).toFixed(
+        2
+      )}. Gracias por su Compra!`,
+    });
+  }
 };
 
 const formulario = document.getElementById("formulario");
