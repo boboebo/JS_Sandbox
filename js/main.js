@@ -84,8 +84,10 @@ const mostrarCompra = () => {
       tablaFecha.className = "tabla-text";
       // columna Precio
       let tablaPrecio = document.createElement("td");
-      tablaPrecio.textContent =
-        "£ " + !ticket.precio ? 0 : Number.parseFloat(ticket.precio).toFixed(2);
+      addlogs(ticket.precio);
+      tablaPrecio.textContent = !ticket.precio
+        ? 0
+        : "£ " + Number.parseFloat(ticket.precio).toFixed(2);
       tablaPrecio.className = "tabla-text";
       let tablaCantidad = document.createElement("td");
       // columna Cantidad
@@ -124,6 +126,7 @@ const borrarTicket = (id) => {
 
 const calcularTotal = () => {
   let tickets = JSON.parse(localStorage.getItem("ticketsInStorage"));
+  total = 0;
   tickets.forEach((item) => {
     total += Number(item.precio);
   });
@@ -131,11 +134,14 @@ const calcularTotal = () => {
 
 const terminaCompra = () => {
   calcularTotal();
-  mostrarAlert(
-    `El total de la compra es £ ${Number.parseFloat(total).toFixed(
+  // Alert con SweetAlert
+  Swal.fire({
+    icon: "success",
+    title: "La compra se realizo con exito",
+    text: `El total de la compra es £ ${Number.parseFloat(total).toFixed(
       2
-    )}. Gracias por su Compra!`
-  );
+    )}. Gracias por su Compra!`,
+  });
 };
 
 const formulario = document.getElementById("formulario");
