@@ -3,10 +3,235 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <script src="ticketCategories.js"></script>
-    <script src="formasDePago.js"></script>
-    <script src="main.js"></script>
+    <meta
+      name="description"
+      content="Compra ti ticket pata el viaje inaugural en el RMS Titanic"
+    />
+    <meta name="Abstract" content="RMS Titanic: comprar tickets | White Star" />
+    <meta name="author" content="Agustin Neuman" />
+    <meta name="copyright" content="WSC" />
+    <meta
+      name="keywords"
+      content="White Star, Buque, Crucero, Titanic, compra tu ticket"
+    />
+    <meta property="og:title" content="" />
+    <meta property="og:description" content="" />
+    <meta property="og:site_name" content="Titanic" />
+    <meta property="og:url" content="" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="./assets/img/head-home.jpg" />
+    <meta property="og:image:type" content="image/png" />
+    <meta
+      property="og:image:alt"
+      content="RMS Titanic - El barco mas asombroso de la historia"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="es_AR" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <title>Compra tu pasaje | Titanic</title>
+    <link
+      rel="shortcut icon"
+      href="../assets/img/Icono-white-star.ico"
+      type="image/x-icon"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../css/style.css" />
+    <script src="./js/data.js" defer></script>
+    <script src="./js/helper.js" defer></script>
+    <script src="./js/main.js" defer></script>
   </head>
-  <body></body>
+  <body class="body">
+    <header class="header">
+      <div class="head-top">
+        <div class="logo-link">
+          <a href="../index.html"
+            ><img
+              src="../assets/img/logo-white-star.png"
+              alt="Logo"
+              class="logo"
+          /></a>
+        </div>
+        <div class="navbar-container">
+          <nav
+            class="navbar navbar-expand-lg bg-dark d-flex justify-content-center rounded opacity-100"
+          >
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon bg-warning"></span>
+            </button>
+            <div class="container-fluid">
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <!-- Pages -->
+                  <li class="nav-item">
+                    <a
+                      class="nav-link text-warning fw-bold border ps-2"
+                      href="./comprar.html"
+                      >Compra tu Pasaje</a
+                    >
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </header>
+    <main class="main">
+      <section class="imagen-main">
+        <img src="./assets/img/head-home.jpg" alt="" />
+      </section>
+      <section class="titulo-main">
+        <div class="linea-horizontal"></div>
+        <h1>RMS Titanic: Compra tu ticket</h1>
+        <h2>DESCUBRE LA NUEVA JOYA DE LA WHITE STAR LINE</h2>
+      </section>
+      <section class="cards-main">
+        <div class="card-container-ticket" id="div-card"></div>
+      </section>
+      <section class="cards-main">
+        <form id="formulario" class="form">
+          <!-- <fieldset enabled class="form"> -->
+          <legend>Compre su ticket</legend>
+          <div class="form-row">
+            <div class="form-input">
+              <label for="origenSelect" class="form-label">Origen</label>
+              <select id="origenSelect" class="form-select"></select>
+            </div>
+            <div class="form-input">
+              <label for="destinoSelect" class="form-label">Destino</label>
+              <select id="destinoSelect" class="form-select"></select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-input">
+              <label for="categoriaSelect" class="form-label">Categoria</label>
+              <select id="categoriaSelect" class="form-select"></select>
+            </div>
+            <div class="form-input">
+              <label for="fecha" class="form-label">Fecha</label>
+              <input
+                type="date"
+                id="fecha"
+                class="form-control"
+                placeholder="Cantidad deseada"
+              />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-input">
+              <label for="precio" class="form-label">Precio</label>
+              <input
+                type="number"
+                id="precio"
+                class="form-control"
+                type="number"
+                min="0.00"
+                max="10000.00"
+                step="0.01"
+                placeholder="Precio"
+              />
+            </div>
+            <div class="form-input">
+              <label for="cantidad" class="form-label">Cantidad</label>
+              <input
+                type="number"
+                id="cantidad"
+                class="form-control"
+                placeholder="Cantidad deseada"
+              />
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary">
+            Agregar Ticket a la compra
+          </button>
+          <!-- </fieldset> -->
+        </form>
+      </section>
+      <section class="cards-main">
+        <div class="form">
+          <table id="tabla" class="table table-striped-columns">
+            <thead>
+              <tr>
+                <th class="tabla-text" scope="col">Tramo</th>
+                <th class="tabla-text" scope="col">Categoria</th>
+                <th class="tabla-text" scope="col">Fecha</th>
+                <th class="tabla-text" scope="col">Precio</th>
+                <th class="tabla-text" scope="col">Cantidad</th>
+                <th class="tabla-text" scope="col">Operaciones</th>
+              </tr>
+            </thead>
+            <tbody id="tbody"></tbody>
+          </table>
+          <button id="boton-comprar" class="btn btn-primary">Comprar</button>
+        </div>
+      </section>
+    </main>
+    <footer class="mi-footer">
+      <div class="mi-footer-secciones">
+        <div class="mi-footer-section">
+          <h4>INFORMACIÓN CORPORATIVA</h4>
+          <p>Acerca de White Star Line</p>
+          <p>Privacidad</p>
+          <p>Terminos de uso</p>
+          <p>Defensa del Consumidor</p>
+        </div>
+        <div class="mi-footer-section">
+          <h4>INFORMACIÓN DEL VIAJE</h4>
+          <p>Antes del crucero</p>
+          <p>Preguntas Frecuentes (FAQ)</p>
+          <p>Términos y Condiciones</p>
+          <p>Nuestras tarifas</p>
+          <p>Consejos de viaje</p>
+        </div>
+        <div class="mi-footer-section">
+          <h4>NOTICIAS Y CONTACTOS</h4>
+          <p>Noticias</p>
+          <p>Contacto</p>
+          <p>Trabaja con nosotros</p>
+        </div>
+        <div class="mi-footer-section">
+          <h4>SEGUINOS</h4>
+          <div class="redes">
+            <div>
+              <img
+                class="imagen-redes"
+                src="../assets/img/icons8-facebook-64-white.png"
+                alt=""
+              />
+              <img
+                class="imagen-redes"
+                src="../assets/img/icons8-instagram-64-white.png"
+                alt=""
+              />
+            </div>
+            <div>
+              <img
+                class="imagen-redes"
+                src="../assets/img/icons8-twitter-cuadrado-64-white.png"
+                alt=""
+              />
+              <img
+                class="imagen-redes"
+                src="../assets/img/icons8-youtube-play-64-white.png"
+                alt=""
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
 </html>
