@@ -96,4 +96,3 @@ fetch("https://dolarapi.com/v1/dolares")
       contenedorDolar.appendChild(cardDolar);
     });
   });
-// contenedorDolar.appendChild(listaPrecio);

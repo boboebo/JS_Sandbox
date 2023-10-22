@@ -1,0 +1,17 @@
+[
+  {
+    "clase": "1",
+    "descripcion": "1ra Clase",
+    "precio": 30
+  },
+  {
+    "clase": "2",
+    "descripcion": "2da Clase",
+    "precio": 12
+  },
+  {
+    "clase": "3",
+    "descripcion": "3ra Clase",
+    "precio": 8
+  }
+]

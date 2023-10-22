@@ -6,6 +6,9 @@ const addlogs = (msg) => {
   console.log(msg);
 };
 
+tickets = [];
+total = 0;
+
 // clase ticket
 let ticketCompra = class {
   constructor(origen, destino, categoria, fecha, precio, cantidad) {
@@ -18,9 +21,6 @@ let ticketCompra = class {
     this.cantidad = cantidad;
   }
 };
-
-let tickets = [];
-let total = 0;
 
 const agregarTicketCompra = () => {
   let origen = document.getElementById("origenSelect").value;
@@ -37,14 +37,7 @@ const agregarTicketCompra = () => {
     precio,
     cantidad
   );
-  // Verifica si el elemento ya existe en el localStorage
-  let ticketsInStorage1 = localStorage.getItem("ticketsInStorage");
 
-  // Si no existe, inicializa un arreglo vacío y guárdalo en el localStorage
-  if (ticketsInStorage1 === undefined) {
-    ticketsInStorage = [];
-    localStorage.setItem("ticketsInStorage", JSON.stringify(ticketsInStorage));
-  }
   tickets = JSON.parse(localStorage.getItem("ticketsInStorage")) || [];
   tickets.push(ticketCur);
   addlogs("this.tickets -> " + this.tickets);
@@ -63,9 +56,6 @@ const formatCategoria = (ticketCategoria) => {
       return "1ra Clase";
   }
 };
-
-//const formatPrecio
-
 const mostrarCompra = () => {
   if (!localStorage.getItem("ticketsInStorage")) {
   } else {
@@ -176,7 +166,7 @@ formulario.addEventListener("submit", (e) => {
   mostrarCompra();
 });
 
-// mostrarCompra();
+mostrarCompra();
 // mostrando tickets en tabla
 
 const botonComprar = document.getElementById("boton-comprar");
