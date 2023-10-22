@@ -19,8 +19,8 @@ let ticketCompra = class {
   }
 };
 
-tickets = [];
-total = 0;
+let tickets = [];
+let total = 0;
 
 const agregarTicketCompra = () => {
   let origen = document.getElementById("origenSelect").value;
@@ -37,7 +37,14 @@ const agregarTicketCompra = () => {
     precio,
     cantidad
   );
+  // Verifica si el elemento ya existe en el localStorage
+  let ticketsInStorage1 = localStorage.getItem("ticketsInStorage");
 
+  // Si no existe, inicializa un arreglo vacío y guárdalo en el localStorage
+  if (ticketsInStorage1 === undefined) {
+    ticketsInStorage = [];
+    localStorage.setItem("ticketsInStorage", JSON.stringify(ticketsInStorage));
+  }
   tickets = JSON.parse(localStorage.getItem("ticketsInStorage")) || [];
   tickets.push(ticketCur);
   addlogs("this.tickets -> " + this.tickets);
@@ -151,6 +158,15 @@ const terminaCompra = () => {
   }
 };
 
+// Verifica si el elemento ya existe en el localStorage
+let ticketsInStorage1 = localStorage.getItem("ticketsInStorage");
+
+// Si no existe, inicializa un arreglo vacío y guárdalo en el localStorage
+if (ticketsInStorage1 === undefined) {
+  ticketsInStorage = [];
+  localStorage.setItem("ticketsInStorage", JSON.stringify(ticketsInStorage));
+}
+
 const formulario = document.getElementById("formulario");
 
 //agregando tickets a la compra
@@ -160,7 +176,7 @@ formulario.addEventListener("submit", (e) => {
   mostrarCompra();
 });
 
-mostrarCompra();
+// mostrarCompra();
 // mostrando tickets en tabla
 
 const botonComprar = document.getElementById("boton-comprar");

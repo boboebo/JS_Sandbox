@@ -1,35 +1,47 @@
 localStorage.setItem("categorias", JSON.stringify(ticketCategorias));
-localStorage.setItem("formsDdPago", formasDePago);
+localStorage.setItem("formsDePago", formasDePago);
 localStorage.setItem("puertos", puertos);
 
 const selectOrigen = document.getElementById("origenSelect");
-selectOrigen.setAttribute("option", "hola");
-
 localStorage.getItem("puertos");
 
 // opciones de selects
-const puertosArray = localStorage.getItem("puertos").split(",");
-puertosArray.forEach(function (opcion) {
-  const puertosItems = document.createElement("option");
-  puertosItems.value = opcion;
-  puertosItems.textContent = opcion;
-  origenSelect.appendChild(puertosItems);
-});
-puertosArray.forEach(function (opcion) {
-  const puertosItems = document.createElement("option");
-  puertosItems.value = opcion;
-  puertosItems.textContent = opcion;
-  destinoSelect.appendChild(puertosItems);
-});
-const categoriasList = JSON.parse(localStorage.getItem("categorias"));
-categoriasList.forEach((opcion) => {
-  const categoriaItem = document.createElement("option");
-  categoriaItem.value = opcion.clase;
-  categoriaItem.textContent = opcion.descripcion;
-  categoriaSelect.appendChild(categoriaItem);
-});
+let puertosArray = [];
+fetch("/js/Data/puertos.json")
+  .then((response) => response.json())
+  .then((data) => {
+    data.forEach((item) => {
+      const puertosItems = document.createElement("option");
+      puertosItems.value = item;
+      puertosItems.textContent = item;
+      origenSelect.appendChild(puertosItems);
+    });
+  });
+
+fetch("/js/Data/puertos.json")
+  .then((response) => response.json())
+  .then((data) => {
+    data.forEach((item) => {
+      const puertosItems = document.createElement("option");
+      puertosItems.value = item;
+      puertosItems.textContent = item;
+      destinoSelect.appendChild(puertosItems);
+    });
+  });
+
+fetch("/js/Data/categorias.json")
+  .then((response) => response.json())
+  .then((data) => {
+    data.forEach((item) => {
+      const categoriaItem = document.createElement("option");
+      categoriaItem.value = item.clase;
+      categoriaItem.textContent = item.descripcion;
+      categoriaSelect.appendChild(categoriaItem);
+    });
+  });
 
 //contruir cards
+const categoriasList = JSON.parse(localStorage.getItem("categorias"));
 const cards = document.getElementById("div-card");
 categoriasList.forEach((item) => {
   const cardTicket = document.createElement("div");
@@ -51,3 +63,37 @@ categoriasList.forEach((item) => {
 
   cards.appendChild(cardTicket);
 });
+
+// section dolar
+let contenedorDolar = document.getElementById("div-dolar");
+//peticion a api
+fetch("https://dolarapi.com/v1/dolares")
+  .then((response) => response.json())
+  .then((data) => {
+    let dataFiltrada = data.filter(
+      (item) => item.nombre == "Oficial" || item.nombre == "Blue"
+    );
+    let tituloDolar = document.createElement("h2");
+    tituloDolar.textContent = "Cotizacion del Dolar ";
+
+    dataFiltrada.forEach((item) => {
+      const cardDolar = document.createElement("div");
+
+      cardDolar.className = "card-dolar";
+      const parrafoNombre = document.createElement("p");
+      parrafoNombre.className = "price";
+      parrafoNombre.textContent = item.nombre;
+      cardDolar.appendChild(parrafoNombre);
+
+      const parrafoVenta = document.createElement("p");
+      parrafoVenta.textContent = "Venta: $" + item.venta;
+      cardDolar.appendChild(parrafoVenta);
+      contenedorDolar.appendChild(cardDolar);
+
+      const parrafoCompra = document.createElement("p");
+      parrafoCompra.textContent = "Compra $" + item.compra;
+      cardDolar.appendChild(parrafoCompra);
+      contenedorDolar.appendChild(cardDolar);
+    });
+  });
+// contenedorDolar.appendChild(listaPrecio);
